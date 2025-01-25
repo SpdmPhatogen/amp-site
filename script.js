@@ -1,10 +1,15 @@
-function toggleDropdown(event) {
+function toggleDropdown(dropdownId, event) {
     event.preventDefault();
-    const dropdown = document.getElementById('youtubeDropdown');
-    dropdown.classList.toggle('show');
+    const dropdowns = document.getElementsByClassName('dropdown-content');
+    for (let dropdown of dropdowns) {
+        if (dropdown.id !== dropdownId) {
+            dropdown.classList.remove('show');
+        }
+    }
+    document.getElementById(dropdownId).classList.toggle('show');
 }
 
-// Close dropdown when clicking outside
+// Close dropdowns when clicking outside
 window.onclick = function(event) {
     if (!event.target.matches('.dropdown-toggle')) {
         const dropdowns = document.getElementsByClassName('dropdown-content');
