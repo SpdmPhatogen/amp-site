@@ -354,4 +354,112 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Update YouTube button and dropdown styles */
+.dropdown-toggle[onclick*="youtubeDropdown"] {
+    transition: all 0.3s ease;
+}
+
+.dropdown-toggle[onclick*="youtubeDropdown"]:hover {
+    background-color: #FF0000;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
+}
+
+#youtubeDropdown a {
+    transition: all 0.3s ease;
+}
+
+#youtubeDropdown a:hover {
+    background-color: #FF0000;
+    color: white;
+    transform: translateX(5px);
+}
+
+/* Discord button styles */
+.social-link[href*="discord"] {
+    transition: all 0.3s ease;
+}
+
+.social-link[href*="discord"]:hover {
+    background-color: #5865F2; /* Discord blue color */
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(88, 101, 242, 0.3);
+}
+
+/* TikTok button styles */
+.dropdown-toggle[onclick*="tiktokDropdown"] {
+    transition: all 0.3s ease;
+}
+
+.dropdown-toggle[onclick*="tiktokDropdown"]:hover {
+    background: linear-gradient(45deg, #000000, #8134AF);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(129, 52, 175, 0.3);
+}
+
+#tiktokDropdown a {
+    transition: all 0.3s ease;
+}
+
+#tiktokDropdown a:hover {
+    background: linear-gradient(45deg, #000000, #8134AF);
+    color: white;
+    transform: translateX(5px);
+}
+
+/* Animated Background Cubes */
+.cube-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.cube {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fall linear infinite;
+    transform: rotate(45deg);
+}
+
+/* Position cubes at different starting points */
+.cube:nth-child(1) { left: 10%; animation-duration: 15s; animation-delay: 0s; }
+.cube:nth-child(2) { left: 20%; animation-duration: 18s; animation-delay: 2s; }
+.cube:nth-child(3) { left: 30%; animation-duration: 13s; animation-delay: 4s; }
+.cube:nth-child(4) { left: 40%; animation-duration: 16s; animation-delay: 1s; }
+.cube:nth-child(5) { left: 50%; animation-duration: 14s; animation-delay: 3s; }
+.cube:nth-child(6) { left: 60%; animation-duration: 17s; animation-delay: 5s; }
+.cube:nth-child(7) { left: 70%; animation-duration: 12s; animation-delay: 2s; }
+.cube:nth-child(8) { left: 80%; animation-duration: 15s; animation-delay: 4s; }
+.cube:nth-child(9) { left: 90%; animation-duration: 14s; animation-delay: 1s; }
+.cube:nth-child(10) { left: 95%; animation-duration: 16s; animation-delay: 3s; }
+
+@keyframes fall {
+    0% {
+        top: -100px;
+        transform: rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        top: 100vh;
+        transform: rotate(360deg);
+        opacity: 0;
+    }
 } 
