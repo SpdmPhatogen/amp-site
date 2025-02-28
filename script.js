@@ -1,44 +1,28 @@
-function toggleDropdown(dropdownId, event) {
-    event.preventDefault();
-    const dropdowns = document.getElementsByClassName('dropdown-content');
-    for (let dropdown of dropdowns) {
-        if (dropdown.id !== dropdownId) {
-            dropdown.classList.remove('show');
-        }
-    }
-    document.getElementById(dropdownId).classList.toggle('show');
-}
+// Set a fixed target date to June 7, 2025 at 00:00:00 UTC
+const targetDate = new Date('2025-06-07T00:00:00Z');
 
-// Close dropdowns when clicking outside
-window.onclick = function(event) {
-    if (!event.target.matches('.dropdown-toggle')) {
-        const dropdowns = document.getElementsByClassName('dropdown-content');
-        for (let dropdown of dropdowns) {
-            if (dropdown.classList.contains('show')) {
-                dropdown.classList.remove('show');
-            }
-        }
-    }
-}
+function updateCountdown() {
+    const currentDate = new Date();
+    const difference = targetDate - currentDate;
 
-// Function to fetch latest Souless video
-async function updateLatestSoulessVideo() {
-    const CHANNEL_ID = 'UCq_0GYqwqtqWLVXUgHn6TKw'; // Souless channel ID
-    const API_KEY = 'YOUR_API_KEY'; // You'll need to get a YouTube Data API key
-    
-    try {
-        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=1`);
-        const data = await response.json();
-        
-        if (data.items && data.items[0]) {
-            const videoId = data.items[0].id.videoId;
-            const iframe = document.querySelector('.project-card:last-child iframe');
-            iframe.src = `https://www.youtube.com/embed/${videoId}`;
-        }
-    } catch (error) {
-        console.error('Error fetching latest video:', error);
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+    if (difference < 0) {
+        clearInterval(countdownInterval);
+        document.getElementById('countdown').innerHTML = '<h2>Countdown Complete!</h2>';
     }
 }
 
-// Update video on page load
-document.addEventListener('DOMContentLoaded', updateLatestSoulessVideo); 
+// Update the countdown every second
+const countdownInterval = setInterval(updateCountdown, 1000);
+
+// Initial call to avoid delay
+updateCountdown(); 
