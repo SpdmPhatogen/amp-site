@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livestream - Amp Emotions X Souless</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-image: url('https://cdn.discordapp.com/attachments/1344641007429357588/1345720335911223328/SPOILER_77d8ebe7480ec98bc6e430690adfb266.gif?ex=67c5933a&is=67c441ba&hm=57b58a7ae0fcbbc203be304ed77948c546c008146754005bd267f6db0d36bfcd&');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.7);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: auto;
+        }
+
+        .header-info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .live-indicator {
+            background: #cc0000;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            animation: pulse 1.5s infinite;
+        }
+
+        .stream-title {
+            font-size: 14px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+        }
+
+        .audio-player {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .audio-player audio {
+            width: 300px;
+            height: 40px;
+            filter: invert(1);
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .audio-player audio:hover {
+            opacity: 1;
+        }
+
+        .playlist {
+            color: white;
+            font-size: 12px;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Hide default audio controls but keep functionality */
+        audio::-webkit-media-controls-panel {
+            background: transparent;
+        }
+
+        .volume-control {
+            width: 100px;
+            margin: 5px 0;
+            margin-left: 8px;
+        }
+
+        .volume-control input[type="range"] {
+            width: 100%;
+            height: 4px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        .volume-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .volume-control input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="container">
+            <img src="https://i.postimg.cc/D8JHQXM6/Untitled123-20250119174357.png" alt="Logo" class="logo">
+            <div class="header-info">
+                <div class="live-indicator">LIVE</div>
+                <div class="stream-title">
+                    🎵 Brazilian Phonk 24/7!
+                </div>
+                <div class="volume-control">
+                    <input type="range" id="volumeSlider" min="0" max="100" value="100">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer" autoplay muted style="display: none;">
+        <source src="Amp Music/PHONK BRAZILIAN ※ BRAZILIAN SONGS _ FUNK MIX 2025 ※ AGGRESSIVE PHONK [e3jaW7UmqpM].mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        const volumeSlider = document.getElementById('volumeSlider');
+        audioPlayer.loop = true;
+
+        // Set initial volume
+        audioPlayer.volume = 0.5;
+        volumeSlider.value = 50;
+
+        // Handle volume control
+        volumeSlider.addEventListener('input', () => {
+            audioPlayer.volume = volumeSlider.value / 100;
+        });
+        
+        // Start playing immediately
+        window.addEventListener('load', function() {
+            audioPlayer.muted = false;
+            audioPlayer.play().catch(function(error) {
+                // If autoplay was prevented, wait for user interaction
+                document.addEventListener('click', function() {
+                    audioPlayer.play();
+                }, { once: true });
+            });
+        });
+    </script>
+</body>
+</html> 

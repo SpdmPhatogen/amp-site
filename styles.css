@@ -462,4 +462,25 @@ footer {
         transform: rotate(360deg);
         opacity: 0;
     }
+}
+
+/* Livestream button styles */
+.livestream-button {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 2rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #FF0000, #8134AF);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.livestream-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
 } 
